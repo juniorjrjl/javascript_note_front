@@ -1,9 +1,13 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
+import { Notification, Section } from 'rbx';
+import './App.scss';
+import Header from "./components/header";
 
 const App = () =>{
   return (
-    <div></div>
+    <Fragment>
+      <Header/>
+    </Fragment>
   );
 }
 
