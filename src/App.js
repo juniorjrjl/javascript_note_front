@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import './App.scss';
-import Header from "./components/header";
+import Routes from './routes';
 
-const App = () =>{
-  return (
-    <Fragment>
-      <Header/>
-    </Fragment>
-  );
-}
+const App = () => (
+  <Fragment>
+    <Routes/>
+  </Fragment>
+)
 
 export default App;
