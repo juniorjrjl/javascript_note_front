@@ -26,7 +26,7 @@ function Header(){
                     <Navbar.Segment as="div" className="navbar-item navbar-end" align="rigth">
                         <Column.Group>
                             <Column>
-                                <Link to="/register" className="buton is-white has-text-custom-purple">
+                                <Link to="/register" className="button is-white has-text-custom-purple">
                                     Register
                                 </Link>
                             </Column>
@@ -43,4 +43,4 @@ function Header(){
     );
 }
 
-export default Header
+export default Header;
