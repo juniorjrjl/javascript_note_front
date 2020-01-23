@@ -25,7 +25,7 @@ function HeaderLogged(props){
           <Column.Group>
             <Column size="11" offset="1">
               <Link to="/notes">
-                <img src={logoImage} />
+                <img src={logoImage} alt="logo"/>
               </Link>
             </Column>
           </Column.Group>
@@ -61,7 +61,7 @@ function HeaderLogged(props){
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item as="div">
-                      <a href="#" onClick={e => logOut()}>LogOut</a>
+                      <a href="/" onClick={e => logOut()}>LogOut</a>
                     </Dropdown.Item>
                   </Dropdown.Content>
                 </Dropdown.Menu>

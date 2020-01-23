@@ -5,7 +5,11 @@ import 'react-quill/dist/quill.snow.css'; // ES6
 
 const Editor = (props) => {
     const [currentContent, setCurrentContent] = useState('');
-    const [timer, setTimer] = useState(null)
+    const [timer, setTimer] = useState(null);
+
+    useEffect(() =>{
+        setCurrentContent(props.note.body)
+    }, [props.note])
 
     const updateNote = (content) =>{
         const title = content.replace(/(<([^>]+)>)/ig, "").slice(0, 30);
@@ -19,10 +23,6 @@ const Editor = (props) => {
             setTimer(setTimeout(() => updateNote(content), 2000))
         }
     }
-
-    useEffect(() =>{
-        setCurrentContent(props.note.body)
-    }, props.note)
 
     const modules = {
         toolbar:[

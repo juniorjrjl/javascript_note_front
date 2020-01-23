@@ -10,9 +10,13 @@ const Notes = (props) => {
     const [notes, setNotes] = useState([]);
     const [current_note, setCurrentNote] = useState({title: "", body: "", id: ""});
 
+    useEffect(() =>{
+        fetchNotes();
+    }, []);
+
     async function fetchNotes(){
         const response = await NoteService.index();
-        if (response.data.length >= 1){
+        if (response.data.length > 0){
             setNotes(response.data.reverse());
             setCurrentNote(response.data[0]);
         }else{
@@ -20,13 +24,9 @@ const Notes = (props) => {
         }
     }
 
-    useEffect(() =>{
-        fetchNotes();
-    }, []);
-
     const selectNote = (id) =>{
         const note = notes.find((note) => note._id === id)
-        setCurrentNote(note)
+        setCurrentNote(note);
     }
 
     const createNote = async () =>{
@@ -45,7 +45,7 @@ const Notes = (props) => {
         const newNotes = notes;
         newNotes[index] = updateNote.data;
         setNotes(newNotes);
-        setCurrentNote(updatedNote.data)
+        setCurrentNote(updatedNote.data);
     }
 
     return(
