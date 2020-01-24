@@ -2,17 +2,14 @@ import React, { useState, useEffect, Fragment } from 'react';
 import '../../styles/notes.scss';
 import { push as Menu} from 'react-burger-menu';
 import { Column } from 'rbx';
-import ListNotes from './list';
+import List from './list';
 import Editor from './editor';
+import Search from './search';
 import NoteService from '../../services/notes';
 
 const Notes = (props) => {
     const [notes, setNotes] = useState([]);
     const [current_note, setCurrentNote] = useState({title: "", body: "", id: ""});
-
-    useEffect(() =>{
-        fetchNotes();
-    }, []);
 
     async function fetchNotes(){
         const response = await NoteService.index();
@@ -43,10 +40,19 @@ const Notes = (props) => {
         const updatedNote = await NoteService.update(oldNote._id, params);
         const index = notes.indexOf(oldNote);
         const newNotes = notes;
-        newNotes[index] = updateNote.data;
+        newNotes[index] = updatedNote.data;
         setNotes(newNotes);
         setCurrentNote(updatedNote.data);
     }
+
+    const searchNotes = async (query) =>{
+        const response = await NoteService.search(query);
+        setNotes(response.data)
+    }
+
+    useEffect(() =>{
+        fetchNotes();
+    }, []);
 
     return(
         <Fragment>
@@ -60,14 +66,14 @@ const Notes = (props) => {
                       customCrossIcon={false}>
                     <Column.Group>
                         <Column size={10} offset={1}>
-                            Search...
+                            <Search searchNotes={searchNotes} fetchNotes={fetchNotes}/>
                         </Column>
                     </Column.Group>
-                    <ListNotes notes={notes}
-                               selectNote={selectNote}
-                               current_note={current_note} 
-                               createNote={createNote} 
-                               deleteNote={deleteNote}/>
+                    <List notes={notes}
+                          selectNote={selectNote}
+                          current_note={current_note} 
+                          createNote={createNote} 
+                          deleteNote={deleteNote}/>
                 </Menu>
                 <Column size={12} className="notes-editor" id="notes-editor">
                     <Editor note={current_note}
